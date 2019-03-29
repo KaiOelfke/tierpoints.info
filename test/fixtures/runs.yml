@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  departure_airport: MyString
+  arrival_airport: MyString
+  carrier: MyString
+  expired: false
+  tp: 1
+  price_cents: 1
+  price_tp_ratio: 1.5
+
+two:
+  departure_airport: MyString
+  arrival_airport: MyString
+  carrier: MyString
+  expired: false
+  tp: 1
+  price_cents: 1
+  price_tp_ratio: 1.5

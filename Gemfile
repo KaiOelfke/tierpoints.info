@@ -35,6 +35,9 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'administrate-field-enum'
+gem 'money-rails', '~>1.12'
+gem "administrate-field-nested_has_many"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

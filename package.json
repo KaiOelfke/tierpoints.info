@@ -2,6 +2,9 @@
   "name": "tierpoints",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.16",
+    "@fortawesome/free-solid-svg-icons": "^5.8.0",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
     "@rails/actioncable": "^6.0.0-beta3",
     "@rails/actiontext": "^6.0.0-beta3",
     "@rails/activestorage": "^6.0.0-beta3",
@@ -13,7 +16,12 @@
     "jquery": "^3.3.1",
     "local-time": "^2.1.0",
     "popper.js": "^1.14.7",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "vue": "^2.6.10",
+    "vue-loader": "^15.7.0",
+    "vue-tables-2": "^1.4.70",
+    "vue-template-compiler": "^2.6.10",
+    "vue-turbolinks": "^2.0.4"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.2.1"

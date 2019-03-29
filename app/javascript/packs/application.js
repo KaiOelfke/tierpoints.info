@@ -18,3 +18,32 @@ $(document).on("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
 })
+
+import TurbolinksAdapter from 'vue-turbolinks'
+import Vue from 'vue/dist/vue.esm'
+
+Vue.use(TurbolinksAdapter)
+
+import { library, config, dom } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSort, faSortAlphaDown, faSortAlphaUp } from '@fortawesome/free-solid-svg-icons'
+library.add( faSort, faSortAlphaDown, faSortAlphaUp)
+
+/**
+ * Setting this config so that Vue-tables-2 will be able to replace sort icons with chevrons
+ * https://fontawesome.com/how-to-use/with-the-api/setup/configuration
+ */
+config.autoReplaceSvg = 'nest'
+Vue.component('fa', FontAwesomeIcon)
+
+import Datatable from '../components/datatable'
+Vue.component('datatable', Datatable)
+
+import { ClientTable } from 'vue-tables-2';
+Vue.use(ClientTable, {}, false, 'bootstrap4', 'default');
+
+document.addEventListener('turbolinks:load', () => {
+  const app = new Vue({
+    el: '[data-behavior="vue"]',
+  })
+})
