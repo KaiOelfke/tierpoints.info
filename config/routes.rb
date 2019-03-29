@@ -6,7 +6,6 @@ Rails.application.routes.draw do
       resources :announcements
       resources :notifications
       resources :runs
-      resources :segments
 
       root to: "users#index"
     end

@@ -8,35 +8,12 @@
       :data="tableData"
       :columns="columns"
       :options="options"
-      @row-click="rowClick"
       ref="ct">
       <div slot="beforeLimit" class="p-3">
         <button type="button" class="btn btn-outline-primary" v-on:click="handleReset">
           Reset Filters
         </button>
       </div>
-      <template slot="child_row" slot-scope="props">
-        <table id="segmentTable">
-          <thead>
-            <tr>
-              <th>Departure</th>
-              <th>Arrival</th>
-              <th>Carrier</th>
-              <th>TP</th>
-              <th>Booking Class</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="segment in props.row.segments">
-              <td>{{ segment.departure_airport }}</td>
-              <td>{{ segment.arrival_airport }}</td>
-              <td>{{ segment.carrier }}</td>
-              <td>{{ segment.tp }}</td>
-              <td>{{ segment.booking_class }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
     </v-client-table>
   </div>
 </template>
@@ -55,27 +32,22 @@
         for (var key in query) {
           this.$refs.ct.query[key] = '';
         }
-      },
-      rowClick: function(event) {
-        if (this.$refs.ct.openChildRows.includes(event.row.id)) {
-          this.$refs.ct.openChildRows = []
-        } else {
-          this.$refs.ct.openChildRows = [event.row.id]
-        }
-      }  
+      } 
     },
     data() {
       return {
         jsonDebug: false,
-        columns: [ 'departure_airport', 'arrival_airport', 'carrier',
-          'tp', 'human_price', 'price_tp_ratio'],
+        columns: [ 'departure_airport', 'arrival_airport', 'carrier_upcase',
+          'tp', 'human_price', 'price_tp_ratio', 'booking_class_capitalize'],
         options: {
           headings: {
             'departure_airport': 'Departure',
             'arrival_airport': 'Arrival',
             'tp': 'TP',
             'human_price': 'Price',
-            'price_tp_ratio': '€/TP'
+            'price_tp_ratio': '€/TP',
+            'carrier_upcase': 'Carrier',
+            'booking_class_capitalize' : 'Class'
           },
           sortable: ['tp', 'human_price', 'price_tp_ratio'],
           sortIcon: {
@@ -86,14 +58,15 @@
           texts: {
             count: "Showing {from} to {to} of {count} runs",
             filter: "Filter:",
-            filterPlaceholder: "e.g. BA",
             limit: "",
             noResults: "No matching runs",
             filterBy: "Filter",
           },
           columnsDisplay: {
             human_price: 'not_mobile',
-            arrival_airport: 'not_mobile'
+            arrival_airport: 'not_mobile',
+            human_price: 'not_mobile',
+            booking_class_capitalize: 'min_tabletL'
           },
           listColumns: {
             tp: 
@@ -105,7 +78,15 @@
             price_tp_ratio: 
               [{ id: '<1', text: '<1 €/TP' },
               { id: '<2', text: '<2 €/TP' },
-              { id: '<3', text: '<3 €/TP' }]
+              { id: '<3', text: '<3 €/TP' }],
+            carrier_upcase: 
+              [{ id: 'AA', text: 'AA'}, { id: 'AY', text: 'AY'},
+              { id: 'BA', text: 'BA'}, { id: 'CX', text: 'CX'},
+              { id: 'IB', text: 'IB'}, { id: 'JL', text: 'JL'},
+              { id: 'LA', text: 'LA'}, { id: 'MH', text: 'MH'},
+              { id: 'QF', text: 'QF'}, { id: 'QR', text: 'QR'},
+              { id: 'RJ', text: 'RJ'}, { id: 'S7', text: 'S7'},
+              { id: 'UL', text: 'UL'}]  
           },
           customFilters: [{ 
             name: 'tp',

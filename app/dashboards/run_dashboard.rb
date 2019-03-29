@@ -9,15 +9,16 @@ class RunDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    segments: Field::HasMany,
     id: Field::Number,
     departure_airport: Field::String,
     arrival_airport: Field::String,
     carrier: Field::Enum,
     expired: Field::Boolean,
     tp: Field::Number,
+    booking_class: Field::Enum,
     price_cents: Field::Number,
     price_tp_ratio: Field::Number.with_options(decimals: 2),
+    itinerary: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -33,24 +34,26 @@ class RunDashboard < Administrate::BaseDashboard
     :arrival_airport,
     :carrier,
     :tp,
+    :booking_class,
     :price_tp_ratio,
     :price_cents,
-    :expired
+    :expired,
+    :itinerary,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :segments,
     :departure_airport,
     :arrival_airport,
     :carrier,
     :expired,
     :tp,
+    :booking_class,
     :price_cents,
     :price_tp_ratio,
-    :created_at,
+    :itinerary,
     :updated_at,
   ].freeze
 
@@ -63,9 +66,10 @@ class RunDashboard < Administrate::BaseDashboard
     :carrier,
     :expired,
     :tp,
+    :booking_class,
     :price_cents,
     :price_tp_ratio,
-    :segments
+    :itinerary,
   ].freeze
 
   # Overwrite this method to customize how runs are displayed

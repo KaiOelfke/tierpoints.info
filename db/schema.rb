@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_115621) do
+ActiveRecord::Schema.define(version: 2019_03_26_074147) do
 
   create_table "announcements", force: :cascade do |t|
     t.datetime "published_at"
@@ -43,34 +43,16 @@ ActiveRecord::Schema.define(version: 2019_03_28_115621) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "run_segments", force: :cascade do |t|
-    t.integer "run_id"
-    t.integer "segment_id"
-    t.integer "position"
-    t.index ["run_id", "segment_id"], name: "index_run_segments_on_run_id_and_segment_id"
-    t.index ["run_id"], name: "index_run_segments_on_run_id"
-    t.index ["segment_id", "run_id"], name: "index_run_segments_on_segment_id_and_run_id"
-    t.index ["segment_id"], name: "index_run_segments_on_segment_id"
-  end
-
   create_table "runs", force: :cascade do |t|
     t.string "departure_airport"
     t.string "arrival_airport"
     t.integer "carrier"
+    t.integer "booking_class"
     t.boolean "expired"
     t.integer "tp"
     t.integer "price_cents"
     t.float "price_tp_ratio"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "segments", force: :cascade do |t|
-    t.string "departure_airport"
-    t.string "arrival_airport"
-    t.integer "carrier"
-    t.integer "booking_class"
-    t.integer "tp"
+    t.string "itinerary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

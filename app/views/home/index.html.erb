@@ -2,7 +2,6 @@
 <p class="lead">Use this website to find the best TP runs.</p>
 
 <datatable 
-  :table-data=" <%= @runs.to_json(:except => [:created_at, :updated_at], :methods => [:human_price], 
-  :include => [:segments]) %> "
+  :table-data=" <%= @runs.to_json(:except => [:created_at, :updated_at, :carrier, :booking_class], :methods => [:human_price, :carrier_upcase, :booking_class_capitalize]) %> "
   >
 </datatable>

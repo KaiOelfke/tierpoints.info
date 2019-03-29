@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @runs = Run.all.includes(:segments)
+    @runs = Run.all
   end
 
   def terms
