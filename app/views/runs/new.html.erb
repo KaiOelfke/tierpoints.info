@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+    <h1 class="text-center">Submit a new Run</h1>
+    <%= form_with(model: @run, local: true, url: new_run_path ) do |form| %>
+    <% if @run.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@run.errors.count, "error") %> prohibited this run from being saved:</h2>
+
+        <ul>
+        <% @run.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.text_field :departure_airport, class: 'form-control', placeholder: 'Departure airport IATA Code' %>
+      <br>
+      <%= form.text_field :arrival_airport, class: 'form-control', placeholder: 'Arrival airport IATA Code' %>
+      <br>
+
+      <div class="row">
+        <div class="col">
+                <div class="float-left">
+        <%= form.label :carrier %>
+      </div>
+      <div class="float-right">
+        <%= form.select :carrier, Run.carriers.keys.map {|bc| [bc.upcase,bc]}, class: 'form-control' %>
+      </div>
+        </div>
+        <div class="col">
+          <div class="float-left">
+        <%= form.label :booking_class, :Class %>
+      </div>
+      <div class="float-right">
+        <%= form.select :booking_class, Run.booking_classes.keys.map {|bc| [bc.capitalize,bc]}, class: 'form-control' %>
+      </div>
+        </div>
+      </div>
+      <%= form.number_field :tp, min: 0, step: 5, class: 'form-control', placeholder: 'Tier Points' %>
+      <br>
+      <%= form.number_field :price, min: 1, step: 0.01, class: 'form-control',  placeholder: 'Price in EUR' %>
+      <br>
+      <div class="float-left">
+        <%= form.label :itinerary%>
+      </div>
+      <%= form.text_area :itinerary, class: 'form-control', placeholder: 'e.g. QR BUD-DOH-SIN R'%>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit class: 'btn btn-lg btn-block btn-primary' %>
+      <%= link_to "Cancel", root_path, class: "btn btn-block btn-outline-secondary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

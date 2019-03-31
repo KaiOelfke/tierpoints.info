@@ -1,7 +1,9 @@
 <h1>Welcome to TierPoints.info!</h1>
-<p class="lead">Use this website to find the best TP runs.</p>
+<p class="lead">Use this website to find the best TP runs and submit new runs to share with others.</p>
 
-<datatable 
-  :table-data=" <%= @runs.to_json(:except => [:created_at, :updated_at, :carrier, :booking_class], :methods => [:human_price, :carrier_upcase, :booking_class_capitalize]) %> "
-  >
-</datatable>
+<% if admin? %>
+  <jsondebug :table-data=" <%= @tableDataJSON %> "></jsondebug>
+<% end %>
+
+<datatable :table-data=" <%= @tableDataJSON %> "></datatable>
+

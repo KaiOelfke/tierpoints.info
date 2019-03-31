@@ -1,19 +1,20 @@
 <template>
   <div id="datatable">
-    <p><button class="btn btn-outline-primary" v-on:click="jsonDebug = !jsonDebug">Toggle JSON</button></p>
-    <div v-if="jsonDebug">
-      <pre style="font-size: 9px">{{ tableData | pretty }}</pre>
-    </div>
     <v-client-table 
       :data="tableData"
       :columns="columns"
       :options="options"
+      @row-click="rowClick"
       ref="ct">
       <div slot="beforeLimit" class="p-3">
         <button type="button" class="btn btn-outline-primary" v-on:click="handleReset">
           Reset Filters
         </button>
       </div>
+      <template slot="child_row" slot-scope="props">
+        <p> {{props.row.itinerary}} </p>
+        <p> {{props.row.human_price}} </p>
+      </template>
     </v-client-table>
   </div>
 </template>
@@ -21,25 +22,28 @@
 <script>
   export default {
     props: ['tableData'],
-    filters: {
-      pretty: function(value) {
-        return JSON.stringify(value, null, 2);
-      }
-    },
     methods: {
       handleReset: function() {
         var query = this.$refs.ct.query
         for (var key in query) {
           this.$refs.ct.query[key] = '';
         }
-      } 
+      },
+      rowClick: function(event) {
+        if (this.$refs.ct.openChildRows.includes(event.row.id)) {
+          this.$refs.ct.openChildRows = []
+        } else {
+          this.$refs.ct.openChildRows = [event.row.id]
+        }
+      }  
     },
     data() {
       return {
-        jsonDebug: false,
         columns: [ 'departure_airport', 'arrival_airport', 'carrier_upcase',
           'tp', 'human_price', 'price_tp_ratio', 'booking_class_capitalize'],
         options: {
+          perPage: 10,
+          perPageValues: [10, 25, 50, 100],
           headings: {
             'departure_airport': 'Departure',
             'arrival_airport': 'Arrival',
@@ -65,7 +69,7 @@
           columnsDisplay: {
             human_price: 'not_mobile',
             arrival_airport: 'not_mobile',
-            human_price: 'not_mobile',
+            departure_airport: 'not_mobile',
             booking_class_capitalize: 'min_tabletL'
           },
           listColumns: {
@@ -139,5 +143,22 @@
 <style>
 .fa, .fas, .far, .fal, .fab {
   line-height: 1.5;
+}
+
+.VueTables__child-row-toggler {
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.VueTables__child-row-toggler--closed::before {
+    content: "+";
+}
+
+.VueTables__child-row-toggler--open::before {
+    content: "-";
 }
 </style>

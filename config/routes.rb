@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'runs/new'
+  get 'runs/create'
   namespace :admin do
       resources :users
       resources :announcements
@@ -15,6 +17,8 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
 
+  post     'new_run' => 'runs#create'
+  get      'new_run' => 'runs#new'
 
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]

@@ -39,6 +39,9 @@ Vue.component('fa', FontAwesomeIcon)
 import Datatable from '../components/datatable'
 Vue.component('datatable', Datatable)
 
+import Jsondebug from '../components/jsondebug'
+Vue.component('jsondebug', Jsondebug)
+
 import { ClientTable } from 'vue-tables-2';
 Vue.use(ClientTable, {}, false, 'bootstrap4', 'default');
 
