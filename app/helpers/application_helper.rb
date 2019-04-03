@@ -11,4 +11,20 @@ module ApplicationHelper
   def admin?
     user_signed_in? && current_user.admin?
   end
+
+  def subscribed?
+    user_signed_in? && current_user.subscribed?
+  end
+
+  def subscribed_monthly?
+    subscribed? && current_user.payment_plan == 'monthly'
+  end
+
+  def subscribed_yearly?
+    subscribed? && current_user.payment_plan == 'yearly'
+  end
+
+  def refundable?
+    user_signed_in? && current_user.refundable?
+  end
 end

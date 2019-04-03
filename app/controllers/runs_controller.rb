@@ -1,8 +1,11 @@
 class RunsController < ApplicationController
-  before_action :authenticate_logged_in
-  rescue_from ActionController::InvalidAuthenticityToken, with: :authenticate_logged_in
+  before_action :authenticate_user!, except: [:new]
+  before_action :redirect_to_signup, only: [:new]
 
   def new
+    if !current_user.confirmed?
+      redirect_to root_path, notice: 'Please confirm your email address before submitting a run.'
+    end
     @run = Run.new()
   end
 
@@ -24,12 +27,12 @@ class RunsController < ApplicationController
     params.require(:run).permit(:departure_airport, :arrival_airport, :carrier, :booking_class, :tp, :price, :itinerary)
   end
 
-  # def force_log_out
-  #   redirect_to root_path, alert: 'You need to sign in again'
-  # end
-
-  def authenticate_logged_in
-    redirect_to root_path, alert: 'Not logged in.' unless user_signed_in?
+  private
+  def redirect_to_signup
+    if !user_signed_in?
+        store_location_for(:user, new_run_path)
+        redirect_to new_user_registration_path
+    end
   end
 
 end

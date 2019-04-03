@@ -1,0 +1,39 @@
+<div class="section">
+  <div class="is-centered">
+    <div class="is-6 pa5">
+      <h1 class="title is-3">Subscribe</h1>
+      <p>Chosen plan: <strong><%= params[:plan].capitalize %></strong>
+        <% if params[:plan] == 'monthly' %>
+          <h2 class="card-title pricing-card-title">3,99 € <small class="text-muted">/ mo</small></h2>
+        <% else %>
+          <h2 class="card-title pricing-card-title">2,49 € <small class="text-muted">/ mo</small></h2>
+        <% end %>
+      <ul class="fa-ul checkout">
+        <li><span class="fa-li"><i class="fas fa-check"></i></span>See all runs</li>
+        <li><span class="fa-li"><i class="fas fa-check"></i></span>Submit new runs</li>
+        <li><span class="fa-li"><i class="fas fa-check"></i></span>Filter runs by all categories</li>
+        <li><span class="fa-li"><i class="fas fa-check"></i></span>Sort deals by any category</li>
+        <li><span class="fa-li"><i class="fas fa-check"></i></span>Support the development and hosting of this indie website</li>
+        <li><span class="fa-li"><i class="fas fa-check"></i></span>30 day money back guarantee via self refund, no questions asked</li>
+      </ul>
+      <%= form_tag subscription_path, class: "payment-form" do |form| %>
+
+        <div class="field checkout">
+          <label for="card-element" class="label">Enter credit or debit card</label>
+
+          <div id="card-element">
+            <!-- A Stripe element will be intserted here !-->
+          </div>
+
+          <div id="card-errors" role="alert"></div>
+
+          <%= hidden_field_tag :plan_id, params[:plan_id] %>
+          <%= hidden_field_tag :plan, params[:plan] %>
+
+          <button class="btn btn-block btn-primary text-uppercase mt-2">Submit</button>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

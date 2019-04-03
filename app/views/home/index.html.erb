@@ -1,9 +1,9 @@
 <h1>Welcome to TierPoints.info!</h1>
 <p class="lead">Use this website to find the best TP runs and submit new runs to share with others.</p>
 
-<% if admin? %>
-  <jsondebug :table-data=" <%= @tableDataJSON %> "></jsondebug>
-<% end %>
-
-<datatable :table-data=" <%= @tableDataJSON %> "></datatable>
-
+<div class="container" data-behavior="vue">
+  <% if admin? %>
+    <jsondebug :table-data=" <%= @tableDataJSON %> "></jsondebug>
+  <% end %>
+  <datatable :table-data=" <%= @tableDataJSON %> "></datatable>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_074147) do
+ActiveRecord::Schema.define(version: 2019_03_31_084911) do
 
   create_table "announcements", force: :cascade do |t|
     t.datetime "published_at"
@@ -57,32 +57,31 @@ ActiveRecord::Schema.define(version: 2019_03_26_074147) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "services", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "provider"
-    t.string "uid"
-    t.string "access_token"
-    t.string "access_token_secret"
-    t.string "refresh_token"
-    t.datetime "expires_at"
-    t.text "auth"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_services_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.string "first_name"
     t.string "last_name"
     t.datetime "announcements_last_read_at"
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_id"
+    t.string "card_brand"
+    t.string "card_exp_month"
+    t.string "card_exp_year"
+    t.string "card_last4"
+    t.boolean "subscribed"
+    t.string "stripe_subscription_id"
+    t.string "payment_plan"
+    t.datetime "free_refund_expiration_time"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

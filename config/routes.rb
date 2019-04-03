@@ -1,8 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  get 'runs/new'
-  get 'runs/create'
   namespace :admin do
       resources :users
       resources :announcements
@@ -20,9 +18,15 @@ Rails.application.routes.draw do
   post     'new_run' => 'runs#create'
   get      'new_run' => 'runs#new'
 
+  # get '/pricing', to: 'home#pricing'
+  
+  resource :subscription, only: [:new, :create, :show, :destroy]
+  resource :card, only: [:update]
+
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users
+  # devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   root to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

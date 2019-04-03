@@ -45,8 +45,19 @@ Vue.component('jsondebug', Jsondebug)
 import { ClientTable } from 'vue-tables-2';
 Vue.use(ClientTable, {}, false, 'bootstrap4', 'default');
 
+
+
 document.addEventListener('turbolinks:load', () => {
-  const app = new Vue({
-    el: '[data-behavior="vue"]',
-  })
+
+  const vueElement = document.querySelector('[data-behavior="vue"]');
+  if (vueElement != null) {
+    const app = new Vue({
+      el: '[data-behavior="vue"]',
+    })
+  }
 })
+
+import Subscriptions from 'subscriptions'
+document.addEventListener('turbolinks:load', Subscriptions.addStripe);
+
+
