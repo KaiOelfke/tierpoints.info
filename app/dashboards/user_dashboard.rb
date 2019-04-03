@@ -23,6 +23,10 @@ class UserDashboard < Administrate::BaseDashboard
     admin: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    subsribed: Field::Boolean,
+    stripe_id: Field::String,
+    payment_plan: Field::String,
+    free_refund_expiration_time: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -54,6 +58,10 @@ class UserDashboard < Administrate::BaseDashboard
     :admin,
     :created_at,
     :updated_at,
+    :subsribed,
+    :stripe_id,
+    :payment_plan,
+    :free_refund_expiration_time,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -72,6 +80,10 @@ class UserDashboard < Administrate::BaseDashboard
     :last_name,
     :announcements_last_read_at,
     :admin,
+    :subsribed,
+    :stripe_id,
+    :payment_plan,
+    :free_refund_expiration_time,
   ].freeze
 
   # Overwrite this method to customize how users are displayed

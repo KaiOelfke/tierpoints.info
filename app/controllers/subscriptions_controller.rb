@@ -26,7 +26,7 @@ class SubscriptionsController < ApplicationController
                 Stripe::Customer.create(email: current_user.email, source: token)
               end
 
-    unless customer.default_source == token 
+    if current_user.stripe_id? && customer.default_source != token 
       Stripe::Customer.update(current_user.stripe_id, {source: token})
     end
 
@@ -67,12 +67,12 @@ class SubscriptionsController < ApplicationController
       charge = charges.first
       Stripe::Refund.create({charge: charge.id})
       Stripe::Subscription.retrieve(current_user.stripe_subscription_id).delete
-      current_user.update(stripe_subscription_id: nil)
+      current_user.update(stripe_subscription_id: nil, subscribed: false)
       current_user.free_refund_expiration_time = Time.at(0)
       redirect_to root_path, notice: "Your subscription has been refunded."
     else 
       Stripe::Subscription.retrieve(current_user.stripe_subscription_id).delete
-      current_user.update(stripe_subscription_id: nil)
+      current_user.update(stripe_subscription_id: nil, subscribed: false)
       redirect_to root_path, notice: "Your subscription has been cancelled."
     end
   
