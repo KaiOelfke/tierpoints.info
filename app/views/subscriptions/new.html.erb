@@ -2,11 +2,11 @@
   <div class="is-centered">
     <div class="is-6 pa5">
       <h1 class="title is-3">Subscribe</h1>
-      <p>Chosen plan: <strong><%= params[:plan].capitalize %></strong>
+      <h2>Chosen plan: <strong><%= params[:plan].capitalize %></strong></h2>
         <% if params[:plan] == 'monthly' %>
-          <h2 class="card-title pricing-card-title">3,99 € <small class="text-muted">/ mo</small></h2>
+          <h2 class="card-title">3,99 € <small class="text-muted">/ mo</small></h2>
         <% else %>
-          <h2 class="card-title pricing-card-title">2,49 € <small class="text-muted">/ mo</small></h2>
+          <h2 class="card-title">2,49 € <small class="text-muted">/ mo</small></h2>
         <% end %>
       <ul class="fa-ul checkout">
         <li><span class="fa-li"><i class="fas fa-check"></i></span>See all runs</li>
@@ -37,3 +37,5 @@
     </div>
   </div>
 </div>
+<script async src="https://js.stripe.com/v3/" id="stripe-script"></script>
+<% @stripe_refresh = true %>

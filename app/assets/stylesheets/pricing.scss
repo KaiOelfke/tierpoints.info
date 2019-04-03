@@ -4,10 +4,6 @@
   }
 }
 
-.card.popular {
-/* background-color: #007bff21;*/
-}
-
 .field.checkout {
   max-width: 400px;
 }
@@ -16,4 +12,11 @@
    max-width: 350px;
    margin-left: 1.5em;
    margin-right: 2em;
+}
+
+.container.pricing {
+  max-width: 400px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
 }

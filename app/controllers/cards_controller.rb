@@ -4,6 +4,10 @@ class CardsController < ApplicationController
 
   def update
 
+    unless params[:stripeToken]
+      return redirect_to subscription_path, flash: { error: 'No card data from Stripe. Please contact customer support.' }
+    end
+
     Stripe::Customer.update(current_user.stripe_id, {
       source: params[:stripeToken]
     })

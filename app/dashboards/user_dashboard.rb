@@ -23,7 +23,7 @@ class UserDashboard < Administrate::BaseDashboard
     admin: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    subsribed: Field::Boolean,
+    subscribed: Field::Boolean,
     stripe_id: Field::String,
     payment_plan: Field::String,
     free_refund_expiration_time: Field::DateTime,
@@ -36,7 +36,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :notifications,
-    :services,
+    # :services,
     :id,
     :email,
   ].freeze
@@ -45,7 +45,7 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :notifications,
-    :services,
+    # :services,
     :id,
     :email,
     :encrypted_password,
@@ -58,7 +58,7 @@ class UserDashboard < Administrate::BaseDashboard
     :admin,
     :created_at,
     :updated_at,
-    :subsribed,
+    :subscribed,
     :stripe_id,
     :payment_plan,
     :free_refund_expiration_time,
@@ -70,7 +70,7 @@ class UserDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :password,
     :notifications,
-    :services,
+    # :services,
     :email,
     :encrypted_password,
     :reset_password_token,
@@ -80,10 +80,7 @@ class UserDashboard < Administrate::BaseDashboard
     :last_name,
     :announcements_last_read_at,
     :admin,
-    :subsribed,
-    :stripe_id,
-    :payment_plan,
-    :free_refund_expiration_time,
+    :subscribed,  
   ].freeze
 
   # Overwrite this method to customize how users are displayed

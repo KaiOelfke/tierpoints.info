@@ -27,4 +27,12 @@ module ApplicationHelper
   def refundable?
     user_signed_in? && current_user.refundable?
   end
+
+  def turbolinks_reload_control_meta_tag
+    if session[:reload_page] == true
+      session[:reload_page] = false
+
+      tag :meta, name: 'turbolinks-visit-control', content: 'reload'
+    end
+  end
 end

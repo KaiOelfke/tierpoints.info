@@ -42,6 +42,8 @@
         columns: [ 'departure_airport', 'arrival_airport', 'carrier_upcase',
           'tp', 'human_price', 'price_tp_ratio', 'booking_class_capitalize'],
         options: {
+          filterable: [ 'departure_airport', 'arrival_airport', 'carrier_upcase',
+          'tp','price_tp_ratio', 'booking_class_capitalize'],
           perPage: 10,
           perPageValues: [10, 25, 50, 100],
           headings: {
@@ -90,7 +92,12 @@
               { id: 'LA', text: 'LA'}, { id: 'MH', text: 'MH'},
               { id: 'QF', text: 'QF'}, { id: 'QR', text: 'QR'},
               { id: 'RJ', text: 'RJ'}, { id: 'S7', text: 'S7'},
-              { id: 'UL', text: 'UL'}]  
+              { id: 'UL', text: 'UL'}],
+            booking_class_capitalize:
+              [{ id: 'Economy', text: 'Economy' },
+              { id: 'Premium', text: 'Premium' },
+              { id: 'Business', text: 'Business' },
+              { id: 'First', text: 'First' }]
           },
           customFilters: [{ 
             name: 'tp',

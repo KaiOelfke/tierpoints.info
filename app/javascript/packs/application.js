@@ -58,6 +58,13 @@ document.addEventListener('turbolinks:load', () => {
 })
 
 import Subscriptions from 'subscriptions'
-document.addEventListener('turbolinks:load', Subscriptions.addStripe);
+document.addEventListener('turbolinks:load', () => {
+  const stripeScriptElement = document.getElementById('stripe-script')
+  const cardElement = document.getElementById('card-element');
+
+  if (stripeScriptElement != null && cardElement != null) {
+    stripeScriptElement.addEventListener('load', Subscriptions.addStripe)
+  }
+});
 
 

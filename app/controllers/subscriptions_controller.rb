@@ -16,9 +16,14 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
+
     plan_id = params[:plan_id]
     plan = Stripe::Plan.retrieve(plan_id)
     token = params[:stripeToken]
+
+    unless params[:stripeToken]
+      return redirect_to subscription_path, flash: { error: 'No card data from Stripe. Please contact customer support.' }
+    end
 
     customer = if current_user.stripe_id?
                 Stripe::Customer.retrieve(current_user.stripe_id)
@@ -52,7 +57,7 @@ class SubscriptionsController < ApplicationController
 
     current_user.update(options)
 
-    redirect_to root_path, notice: "Your subscription was setup successfully!"
+    redirect_to root_path, notice: "Thank you for subscribing."
   end
 
   def destroy

@@ -1,16 +1,28 @@
 <h1 class="title">Premium Membership</h1>
 <h2 class="subtitle">Access more features and support the website.</h2>
 <br>
-<div class="container">
-</div>
 <% if subscribed?%>
-  <h4>Thank you for Subscribing.</h3>
-  <div>
-    <p>Active plan: <strong><%= current_user.payment_plan.capitalize %></strong>
+  <div class="container pricing">
+    <h4> 
+      <div class="row">
+        <div class="col">Active plan: </div>
+        <div class="col text-right"><strong><%= current_user.payment_plan.capitalize %></strong></div>
+      </div>
+    </h4>
     <% if current_user.payment_plan == 'monthly' %>
-      <h2 class="card-title pricing-card-title">Price: 3,99 € <small class="text-muted">/ mo</small></h2>
+      <h4 class="card-title">
+        <div class="row">
+          <div class="col">Price:</div>
+          <div class="col"><strong>3,99 € </strong><small class="text-muted">/ mo</small></div>
+        </div>
+      </h4>
     <% else %>
-      <h2 class="card-title pricing-card-title">Price: 2,49 € <small class="text-muted">/ mo</small></h2>
+      <h4 class="card-title">
+        <div class="row">
+          <div class="col">Price:</div>
+          <div class="col text-right"><strong>2,49 € </strong><small class="text-muted">/ mo</small></div>
+        </div>
+      </h4>
     <% end %>
     
     <h6>Current credit card:</h6>
@@ -44,7 +56,7 @@
 
   </div>
 <% else %>
-  <section class="pricing py-5">
+  <section class="pricing pb-3">
     <div class="container">
       <div class="row">
 
@@ -113,4 +125,5 @@
     </div>
   </section>
 <% end %>
-
+<script async src="https://js.stripe.com/v3/" id="stripe-script"></script>
+<% @stripe_refresh = true %>

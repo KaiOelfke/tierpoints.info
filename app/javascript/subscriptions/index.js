@@ -4,12 +4,10 @@ export default {
     const stripe = Stripe(public_key);
     const elements = stripe.elements();
 
-    console.log('subscriptions.js loaded');
-
     const style = {
       base: {
         color: '#32325d',
-        lineHeight: '26px',
+        // lineHeight: '26px',
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSmoothing: 'antialiased',
         fontSize: '16px',
