@@ -1,7 +1,7 @@
-<div class="section">
-  <div class="is-centered">
-    <div class="is-6 pa5">
-      <h1 class="title is-3">Subscribe</h1>
+<div class="row">
+    <div class="col-lg-5 col-md-6 ml-auto mr-auto">
+      <h1 class="title">Subscribe</h1>
+      <div class="container pricing">
       <h2>Chosen plan: <strong><%= params[:plan].capitalize %></strong></h2>
         <% if params[:plan] == 'monthly' %>
           <h2 class="card-title">3,99 € <small class="text-muted">/ mo</small></h2>
@@ -15,6 +15,8 @@
         <li><span class="fa-li"><i class="fas fa-check"></i></span>Sort deals by any category</li>
         <li><span class="fa-li"><i class="fas fa-check"></i></span>Support the development and hosting of this indie website</li>
         <li><span class="fa-li"><i class="fas fa-check"></i></span>30 day money back guarantee via self refund, no questions asked</li>
+        <li><span class="fa-li"><i class="fas fa-check"></i></span>Tierpoints.info uses <%= link_to "Stripe", "https://stripe.com/", target: :_blank%> for secure payments and <%= link_to "does not store your credit card data", faq_path, target: :_blank %>.</li>
+
       </ul>
       <%= form_tag subscription_path, class: "payment-form" do |form| %>
 
@@ -30,7 +32,7 @@
           <%= hidden_field_tag :plan_id, params[:plan_id] %>
           <%= hidden_field_tag :plan, params[:plan] %>
 
-          <button class="btn btn-block btn-primary text-uppercase mt-2">Submit</button>
+          <button class="btn btn-lg btn-block btn-primary mt-2">Subscribe</button>
         </div>
 
       <% end %>

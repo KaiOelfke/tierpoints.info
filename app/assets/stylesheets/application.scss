@@ -10,7 +10,7 @@
 @import "announcements";
 @import "pricing";
 @import "stripe-custom";
-
+@import "faq";
 
 // Fixes bootstrap nav-brand container overlap
 @include media-breakpoint-down(xs) {

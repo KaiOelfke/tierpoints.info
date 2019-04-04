@@ -78,7 +78,7 @@
                 <li class="text-secondary"><span class="fa-li"><i class="fas fa-check"></i></span>Submit new runs</li>
               </ul>
               <% if !user_signed_in?  %>
-                <%= link_to 'Sign up for free', new_user_registration_path, class: 'btn btn-block btn-primary text-uppercase mt-auto' %>
+                <%= link_to 'Sign up for free', new_user_registration_path, class: 'btn btn-block btn-lg btn-primary text-uppercase mt-auto' %>
               <% elsif !subscribed? %>
                 <span class="btn btn-block btn-lg btn-outline-success mt-auto">Currently Active</span>
               <% end %>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
       root to: "users#index"
     end
+  get '/faq', to: 'home#faq'
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
     authenticate :user, lambda { |u| u.admin? } do
@@ -17,8 +18,6 @@ Rails.application.routes.draw do
 
   post     'new_run' => 'runs#create'
   get      'new_run' => 'runs#new'
-
-  # get '/pricing', to: 'home#pricing'
   
   resource :subscription, only: [:new, :create, :show, :destroy]
   resource :card, only: [:update]

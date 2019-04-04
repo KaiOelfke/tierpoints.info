@@ -1,5 +1,5 @@
 class SubscriptionsController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
+  before_action :authenticate_user!, except: [:show, :new, :create]
   before_action :redirect_to_signup, only: [:new]
 
   def show
@@ -11,7 +11,7 @@ class SubscriptionsController < ApplicationController
     end
 
     if current_user.subscribed?
-      redirect_to root_path, notice: "You are already a subscriber"
+      redirect_to root_path, notice: "You already subscribed."
     end
   end
 
@@ -87,7 +87,7 @@ class SubscriptionsController < ApplicationController
 
   def redirect_to_signup
     if !user_signed_in?
-      store_location_for(:user, new_subscription_path)
+      store_location_for(:user, new_subscription_path(plan: params[:plan], plan_id: params[:plan_id]))
       redirect_to new_user_registration_path
     end
   end
