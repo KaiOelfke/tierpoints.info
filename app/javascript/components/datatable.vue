@@ -6,8 +6,8 @@
       :options="options"
       @row-click="rowClick"
       ref="ct">
-      <div slot="beforeLimit" class="p-3">
-        <button type="button" class="btn btn-outline-primary" v-on:click="handleReset">
+      <div slot="beforeTable" class="mb-2">
+        <button type="button" class="btn btn-sm btn-primary" v-on:click="handleReset">
           Reset Filters
         </button>
       </div>

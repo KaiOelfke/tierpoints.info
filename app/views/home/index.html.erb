@@ -1,9 +1,18 @@
 <h1>Welcome to TierPoints.info!</h1>
 <p class="lead">Use this website to find the best TP runs and submit new runs to share with others.</p>
 
-<div class="container" data-behavior="vue">
+<div data-behavior="vue">
   <% if admin? %>
     <jsondebug :table-data=" <%= @tableDataJSON %> "></jsondebug>
   <% end %>
-  <datatable :table-data=" <%= @tableDataJSON %> "></datatable>
+
+  <% if trialable? %>
+    <h3>You can use the premium features for <%= remaining_trial_days %> more days.</h3>
+    <datatable :table-data=" <%= @tableDataJSON %> "></datatable>
+  <% elsif subscribed? %>
+    <datatable :table-data=" <%= @tableDataJSON %> "></datatable>
+  <% else  %>
+    <h5>You are using the free version. For more features such as sorting, filtering as well as supporting the development and hosting of this website please <%= link_to "subscribe", subscription_path %>.</h5>
+    <freedatatable :table-data=" <%= @tableDataJSON %> "></freedatatable>
+  <% end %>  
 </div>

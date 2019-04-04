@@ -38,6 +38,8 @@ Vue.component('fa', FontAwesomeIcon)
 
 import Datatable from '../components/datatable'
 Vue.component('datatable', Datatable)
+import Freedatatable from '../components/freedatatable'
+Vue.component('freedatatable', Freedatatable)
 
 import Jsondebug from '../components/jsondebug'
 Vue.component('jsondebug', Jsondebug)

@@ -1,6 +1,6 @@
 <template>
   <div id="jsondebug">
-    <p><button class="btn btn-outline-primary" v-on:click="jsonDebug = !jsonDebug">Toggle JSON</button></p>
+    <p><button class="btn btn-sm btn-outline-primary" v-on:click="jsonDebug = !jsonDebug">Toggle JSON</button></p>
     <div v-if="jsonDebug">
       <pre style="font-size: 9px">{{ tableData | pretty }}</pre>
     </div>

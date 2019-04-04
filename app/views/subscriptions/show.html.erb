@@ -1,128 +1,141 @@
-<h1 class="title">Premium Membership</h1>
-<h2 class="subtitle">Access more features and support the website.</h2>
-<br>
 <% if subscribed?%>
-  <div class="container pricing">
-    <h4> 
-      <div class="row">
-        <div class="col">Active plan: </div>
-        <div class="col text-right"><strong><%= current_user.payment_plan.capitalize %></strong></div>
-      </div>
-    </h4>
-    <% if current_user.payment_plan == 'monthly' %>
-      <h4 class="card-title">
-        <div class="row">
-          <div class="col">Price:</div>
-          <div class="col"><strong>3,99 € </strong><small class="text-muted">/ mo</small></div>
-        </div>
-      </h4>
-    <% else %>
-      <h4 class="card-title">
-        <div class="row">
-          <div class="col">Price:</div>
-          <div class="col text-right"><strong>2,49 € </strong><small class="text-muted">/ mo</small></div>
-        </div>
-      </h4>
-    <% end %>
-    
-    <h6>Current credit card:</h6>
-    <div> <%= current_user.card_brand %> **** **** **** <%= current_user.card_last4 %> </div>
-    <div> Expires <%= current_user.card_exp_month %> / <%= current_user.card_exp_year %> </div>
-    
-    <%= form_tag card_path, method: :put, class: "payment-form" do |form| %>
-
-        <div class="field checkout mt-2">
-          <div id="card-element">
-            <!-- A Stripe element will be intserted here !-->
+  <div class="row">
+    <div class="col-lg-5 col-md-6 ml-auto mr-auto">
+      <h1 class="title">Premium Membership</h1>
+      <div class="container pricing">
+        <h4> 
+          <div class="row">
+            <div class="col">Active plan: </div>
+            <div class="col text-right"><strong><%= current_user.payment_plan.capitalize %></strong></div>
           </div>
+        </h4>
+        <% if current_user.payment_plan == 'monthly' %>
+          <h4 class="card-title">
+            <div class="row">
+              <div class="col">Price:</div>
+              <div class="col"><strong>3,99 € </strong><small class="text-muted">/ mo</small></div>
+            </div>
+          </h4>
+        <% else %>
+          <h4 class="card-title">
+            <div class="row">
+              <div class="col">Price:</div>
+              <div class="col text-right"><strong>2,49 € </strong><small class="text-muted">/ mo</small></div>
+            </div>
+          </h4>
+        <% end %>
 
-          <div id="card-errors" role="alert"></div>
+        <h6>Current credit card:</h6>
+        <div> <%= current_user.card_brand %> **** **** **** <%= current_user.card_last4 %> </div>
+        <div> Expires <%= current_user.card_exp_month %> / <%= current_user.card_exp_year %> </div>
 
-          <%= hidden_field_tag :plan_id, params[:plan_id] %>
-          <%= hidden_field_tag :plan, params[:plan] %>
+        <%= form_tag card_path, method: :put, class: "payment-form" do |form| %>
+          <div class="field checkout mt-2">
+            <div id="card-element">
+              <!-- A Stripe element will be intserted here !-->
+            </div>
 
-          <div class="btn-group-vertical btn-block">
-            <button class="btn btn-primary mt-2 rounded">Update Credit Card</button>
+            <div id="card-errors" role="alert"></div>
 
-            <% if refundable? %>
-              <%= link_to 'Refund Subscription', subscription_path, class: 'btn mt-2 btn-warning rounded', data: { confirm: 'Are you sure?' }, method: :delete %>
-            <% else %>
-              <%= link_to 'Cancel Subscription', subscription_path, class: 'btn mt-2 btn-warning rounded', data: { confirm: 'Are you sure?' }, method: :delete %>
-            <% end %>
-          </div>  
-        </div>
+            <%= hidden_field_tag :plan_id, params[:plan_id] %>
+            <%= hidden_field_tag :plan, params[:plan] %>
 
-      <% end %>
+            <div class="btn-group-vertical btn-block">
+              <button class="btn btn-primary mt-2 rounded">Update Credit Card</button>
 
+              <% if refundable? %>
+                <%= link_to 'Refund Subscription', subscription_path, class: 'btn mt-2 btn-warning rounded', data: { confirm: 'Are you sure?' }, method: :delete %>
+              <% else %>
+                <%= link_to 'Cancel Subscription', subscription_path, class: 'btn mt-2 btn-warning rounded', data: { confirm: 'Are you sure?' }, method: :delete %>
+              <% end %>
+            </div>  
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% else %>
-  <section class="pricing pb-3">
-    <div class="container">
+  <h1 class="title">Premium Membership</h1>
+  <section class="pricing">
       <div class="row">
 
         <!-- Free Tier -->
         <div class="col-lg-4">
-          <div class="card mb-5 mb-lg-0 box-shadow subscription">
+          <div class="card mb-5 mb-lg-0 box-shadow subscription shadow">
             <div class="card-header">
               <h4 class="my-0 font-weight-normal text-center">Free</h4>
             </div>
             <div class="card-body d-flex flex-column">
-              <h1 class="card-title pricing-card-title text-center">0,00 € <small class="text-muted text-center">/ mo</small></h1>
+              <h1 class="card-title pricing-card-title text-center mb-0">0 €</h1>
+              <div>
+                <h3 class="card-title text-center">
+                  <small class="text-muted text-center">Free!</small>
+                </h3>
+              </div>
+
               <ul class="fa-ul">
-                <li><span class="fa-li"><i class="fas fa-check"></i></span>See all runs</li>
-                <li><span class="fa-li"><i class="fas fa-check"></i></span>Submit new runs</li>
+                <li class="text-secondary"><span class="fa-li"><i class="fas fa-check"></i></span>See all runs</li>
+                <li class="text-secondary"><span class="fa-li"><i class="fas fa-check"></i></span>Submit new runs</li>
               </ul>
               <% if !user_signed_in?  %>
                 <%= link_to 'Sign up for free', new_user_registration_path, class: 'btn btn-block btn-primary text-uppercase mt-auto' %>
               <% elsif !subscribed? %>
-                <span class="btn btn-block btn-success text-uppercase mt-auto">Currently active</span>
+                <span class="btn btn-block btn-lg btn-outline-success mt-auto">Currently Active</span>
               <% end %>
             </div>
           </div>
-      </div>
+        </div>
         <!-- Yearly Tier -->
         <div class="col-lg-4">
-          <div class="card mb-5 mb-lg-0 box-shadow popular subscription">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal text-center">Yearly</h4>
+          <div class="card mb-5 mb-lg-0 box-shadow popular subscription shadow border border-primary">
+            <div class="card-header bg-primary">
+              <h4 class="my-0 font-weight-normal text-center text-white">Yearly: Best Value</h4>
             </div>
             <div class="card-body d-flex flex-column">
-              <h1 class="card-title pricing-card-title text-center">2,49 € <small class="text-muted text-center">/ mo</small></h1>
+              <h1 class="card-title pricing-card-title text-center mb-0">2,49 €</h1>
+              <div>
+                <h3 class="card-title text-center">
+                  <small class="text-muted text-center">per month</small>
+                </h3>
+              </div>
               <ul class="fa-ul">
-                <li><span class="fa-li"><i class="fas fa-check"></i></span>See all runs</li>
-                <li><span class="fa-li"><i class="fas fa-check"></i></span>Submit new runs</li>
+                <li class="text-secondary"><span class="fa-li"><i class="fas fa-check"></i></span>See all runs</li>
+                <li class="text-secondary"><span class="fa-li"><i class="fas fa-check"></i></span>Submit new runs</li>
                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Filter runs by all categories</li>
                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Sort deals by any category</li>
                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Support the development and hosting of this indie website</li>
                 <li><span class="fa-li"><i class="fas fa-check"></i></span>30 day money back guarantee via self refund, no questions asked</li>
-                <li><span class="fa-li"><i class="fas fa-check"></i></span>Best value</li>
               </ul>
-              <%= link_to 'Subscribe', new_subscription_path(plan: "yearly", plan_id: Rails.application.credentials.yearly), class: 'btn btn-block text-uppercase mt-auto btn-primary' %>
+              <%= link_to 'Subscribe', new_subscription_path(plan: "yearly", plan_id: Rails.application.credentials.yearly), class: 'btn btn-lg btn-block mt-auto btn-primary' %>
             </div>
           </div>
         </div>
         <!-- Monthly Tier -->
         <div class="col-lg-4">
-          <div class="card mb-5 mb-lg-0 box-shadow subscription">
+          <div class="card mb-5 mb-lg-0 box-shadow subscription shadow">
             <div class="card-header">
               <h4 class="my-0 font-weight-normal text-center">Monthly</h4>
             </div>
             <div class="card-body d-flex flex-column">
-              <h1 class="card-title pricing-card-title text-center">3,99 € <small class="text-muted text-center">/ mo</small></h1>
+              <h1 class="card-title pricing-card-title text-center mb-0">3,99 €</h1>
+              <div>
+                <h3 class="card-title text-center">
+                  <small class="text-muted text-center">per month</small>
+                </h3>
+              </div>
               <ul class="fa-ul">
-                <li><span class="fa-li"><i class="fas fa-check"></i></span>See all runs</li>
-                <li><span class="fa-li"><i class="fas fa-check"></i></span>Submit new runs</li>
+                <li class="text-secondary"><span class="fa-li"><i class="fas fa-check"></i></span>See all runs</li>
+                <li class="text-secondary"><span class="fa-li"><i class="fas fa-check"></i></span>Submit new runs</li>
                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Filter runs by all categories</li>
                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Sort deals by any category</li>
                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Support the development and hosting of this indie website</li>
                 <li><span class="fa-li"><i class="fas fa-check"></i></span>30 day money back guarantee via self refund, no questions asked</li>
               </ul>
-              <%= link_to 'Subscribe', new_subscription_path(plan: "monthly", plan_id: Rails.application.credentials.monthly), class: 'btn btn-block text-uppercase mt-auto btn-primary' %>
+              <%= link_to 'Subscribe', new_subscription_path(plan: "monthly", plan_id: Rails.application.credentials.monthly), class: 'btn btn-lg btn-block mt-auto btn-primary' %>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </section>
 <% end %>
 <script async src="https://js.stripe.com/v3/" id="stripe-script"></script>

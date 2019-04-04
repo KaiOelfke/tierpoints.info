@@ -28,6 +28,17 @@ module ApplicationHelper
     user_signed_in? && current_user.refundable?
   end
 
+  def trialable?
+    user_signed_in? && !current_user.subscribed? && current_user.created_at.to_date + 7.days >= Time.zone.today
+  end
+
+  def remaining_trial_days
+    if trialable?
+      return (Time.zone.today - (current_user.created_at.to_date - 7.days)).to_i.to_s
+    end
+    return ""
+  end
+
   def turbolinks_reload_control_meta_tag
     if session[:reload_page] == true
       session[:reload_page] = false
