@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2019_03_31_084911) do
     t.string "arrival_airport"
     t.integer "carrier"
     t.integer "booking_class"
-    t.boolean "expired"
+    t.datetime "expire_date"
     t.integer "tp"
     t.integer "price_cents"
     t.float "price_tp_ratio"

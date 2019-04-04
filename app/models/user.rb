@@ -15,6 +15,6 @@ class User < ApplicationRecord
   end
 
   def refundable?
-    subscribed? && free_refund_expiration_time > DateTime.now
+    subscribed? && free_refund_expiration_time > Time.zone.today
   end
 end

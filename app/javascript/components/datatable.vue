@@ -40,10 +40,10 @@
     data() {
       return {
         columns: [ 'departure_airport', 'arrival_airport', 'carrier_upcase',
-          'tp', 'human_price', 'price_tp_ratio', 'booking_class_capitalize'],
+          'tp', 'human_price', 'price_tp_ratio', 'booking_class_capitalize', 'human_expire_date'],
         options: {
           filterable: [ 'departure_airport', 'arrival_airport', 'carrier_upcase',
-          'tp','price_tp_ratio', 'booking_class_capitalize'],
+          'tp','price_tp_ratio', 'booking_class_capitalize', 'human_expire_date'],
           perPage: 10,
           perPageValues: [10, 25, 50, 100],
           headings: {
@@ -53,7 +53,8 @@
             'human_price': 'Price',
             'price_tp_ratio': '€/TP',
             'carrier_upcase': 'Carrier',
-            'booking_class_capitalize' : 'Class'
+            'booking_class_capitalize' : 'Class',
+            'human_expire_date': 'Expires'
           },
           sortable: ['tp', 'human_price', 'price_tp_ratio'],
           sortIcon: {
@@ -97,7 +98,9 @@
               [{ id: 'Economy', text: 'Economy' },
               { id: 'Premium', text: 'Premium' },
               { id: 'Business', text: 'Business' },
-              { id: 'First', text: 'First' }]
+              { id: 'First', text: 'First' }],
+            human_expire_date: 
+              [{ id: 'expired', text: 'Expired'}, { id: 'active', text: 'Active'}]
           },
           customFilters: [{ 
             name: 'tp',
@@ -138,6 +141,20 @@
                 default:
                   return false
               }
+            }
+          },
+          { name: 'human_expire_date',
+            callback: function (row, query) {
+              var today = new Date();
+              if (row.human_expire_date == 'No date set.') {
+                return false
+              } 
+              var expireDate = new Date(row.human_expire_date);
+              if (query == 'active') {
+                return expireDate >= today
+              } else if (query == 'expired') {
+                return expireDate < today
+              } else { return true }
             }
           }]
         },

@@ -24,7 +24,7 @@ class RunsController < ApplicationController
   private
 
   def run_params
-    params.require(:run).permit(:departure_airport, :arrival_airport, :carrier, :booking_class, :tp, :price, :itinerary)
+    params.require(:run).permit(:departure_airport, :arrival_airport, :carrier, :booking_class, :tp, :price, :itinerary, :expire_date)
   end
 
   private

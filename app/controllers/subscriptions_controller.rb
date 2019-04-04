@@ -52,7 +52,7 @@ class SubscriptionsController < ApplicationController
     ) if params[:user][:card_last4]
 
     options.merge!(
-      free_refund_expiration_time: DateTime.now + 31.days
+      free_refund_expiration_time: Time.zone.today + 31.days
     ) if !current_user.free_refund_expiration_time
 
     current_user.update(options)

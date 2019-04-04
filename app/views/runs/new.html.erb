@@ -16,11 +16,8 @@
 
     <div class="form-group">
       <%= form.text_field :departure_airport, class: 'form-control', placeholder: 'Departure airport IATA Code' %>
-      <br>
-      <%= form.text_field :arrival_airport, class: 'form-control', placeholder: 'Arrival airport IATA Code' %>
-      <br>
-
-      <div class="row">
+      <%= form.text_field :arrival_airport, class: 'form-control mt-2', placeholder: 'Arrival airport IATA Code' %>
+      <div class="row mt-2">
         <div class="col">
                 <div class="float-left">
         <%= form.label :carrier %>
@@ -39,10 +36,19 @@
         </div>
       </div>
       <%= form.number_field :tp, min: 0, step: 5, class: 'form-control', placeholder: 'Tier Points' %>
-      <br>
-      <%= form.number_field :price, min: 1, step: 0.01, class: 'form-control',  placeholder: 'Price in EUR' %>
-      <br>
-      <div class="float-left">
+      <%= form.number_field :price, min: 1, step: 0.01, class: 'form-control mt-2',  placeholder: 'Price in EUR' %>
+      <div class="mt-2">
+        <%= form.label :expire_date, 'Expires at' %>
+        <%= form.text_field :expire_date, class: 'form-control', 
+          data: {
+            controller: "flatpickr",
+            flatpickr_format: "Y-m-d",
+            flatpickr_date_format: "d.m.Y",
+            flatpickr_min_date: Date.parse("2000-1-1")
+          }   
+        %>  
+      </div>
+      <div class="float-left mt-2">
         <%= form.label :itinerary%>
       </div>
       <%= form.text_area :itinerary, class: 'form-control', placeholder: 'e.g. QR BUD-DOH-SIN R'%>

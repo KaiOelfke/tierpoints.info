@@ -13,8 +13,20 @@ class Run < ApplicationRecord
 
   before_validation :compute_price_tp_ratio
 
+  def expired?
+    expire_date? && expire_date <= Time.zone.today
+  end
+
   def human_price
     price.format
+  end
+
+  def human_expire_date
+    if expire_date?
+      expire_date.strftime("%Y-%m-%d")
+    else
+      "No date set."
+    end
   end
 
   def departure_airport=(s)

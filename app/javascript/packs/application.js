@@ -67,4 +67,16 @@ document.addEventListener('turbolinks:load', () => {
   }
 });
 
+// Stimulus
+import { Application } from "stimulus"
+// import { definitionsFromContext } from "stimulus/webpack-helpers"
+
+const application = Application.start()
+// const context = require.context("./controllers", true, /\.js$/)
+
+// application.load(definitionsFromContext(context))
+
+import Flatpickr from "stimulus-flatpickr";
+application.register("flatpickr", Flatpickr);
+import "flatpickr/dist/flatpickr.min.css";
 
