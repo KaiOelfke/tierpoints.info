@@ -82,3 +82,12 @@ import Flatpickr from "stimulus-flatpickr";
 application.register("flatpickr", Flatpickr);
 import "flatpickr/dist/flatpickr.min.css";
 
+import Chat from 'chat'
+
+document.addEventListener('turbolinks:load', () => {
+  window.$crisp=[];
+  window.CRISP_COOKIE_EXPIRE = 3600;
+  window.CRISP_WEBSITE_ID="6da2b682-7013-4e7d-80f4-906b35c27f6a";
+  Chat.addChat();
+});
+
